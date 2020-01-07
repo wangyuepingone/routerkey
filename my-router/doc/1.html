@@ -27,6 +27,42 @@
     <title>React App</title>
   </head>
   <body>
+    <a href="/#a">跳转/a</a>
+    <a href="/#b">跳转/b</a>
     <div id="root"></div>
+    <script>
+        let root = document.getElementById('root');
+        window.onpushState = function(event){
+            console.log(event)
+        }
+        ;(function(history){
+            let pushstate = history.pushState;
+            history.pushState =function(state,title,path){
+                if(typeof window.onpushState === 'function'){
+                    window.onpushState(state,title,path);
+                }
+                pushstate.apply(history,arguments);
+            }
+        })(window.history);
+        setTimeout(()=>{
+            window.history.pushState({path:'page1'},'page1','/page1')
+        },1000)
+
+        setTimeout(()=>{
+            window.history.pushState({path:'page2'},'page2','/page2')
+        },3000);
+
+        setTimeout(()=>{
+            window.history.pushState({path:'page3'},'page3','/page3')
+        },6000);
+
+        setTimeout(()=>{
+            window.history.back()
+        },6000)
+
+        setTimeout(()=>{
+            window.history.go(1)
+        },12000)
+    </script>
   </body>
 </html>
