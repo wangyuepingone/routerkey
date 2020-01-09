@@ -11,6 +11,7 @@ interface Props{
 export default class extends React.Component<Props>{
     static contextType = RouterContext
     render(){
+        console.log(window.location)
         let { path='/',component:RouterComponent,exact=false} = this.props;
         let pathname = this.context.location.pathname;
         let paramsName:Array<Key> = []
