@@ -1,6 +1,7 @@
-import { Location } from '../history'
+import { Location,History } from '../history'
 export interface ContextValue{
-    location?:Location
+    location?:Location;
+    history?: History;
 }
 export interface match<Params = {}> {
     params: Params;

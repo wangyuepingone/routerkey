@@ -1,7 +1,9 @@
 import React from 'react';
-import RouterContext from './context'
+import RouterContext from './context';
+import { pathToRegexp,Key } from 'path-to-regexp'
 interface Props{
     path:string,
+    exact?:boolean,
     component:React.JSXElementConstructor<any>
 }
 
@@ -9,10 +11,16 @@ interface Props{
 export default class extends React.Component<Props>{
     static contextType = RouterContext
     render(){
-        let { path,component:RouterComponent} = this.props;
+        let { path='/',component:RouterComponent,exact=false} = this.props;
         let pathname = this.context.location.pathname;
-        if(path === pathname){
-            return <RouterComponent/>
+        let paramsName:Array<Key> = []
+        let regexp = pathToRegexp(path,paramsName,{end:exact});
+        let result = pathname.match(regexp);
+        let routerProps = {
+            location:this.context.location
+        }
+        if(result){
+            return <RouterComponent {...routerProps}/>
         }
         return null
     }
