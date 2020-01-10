@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps,Link,Route } from 'react-router-dom';
+import { RouteComponentProps,Link,Route } from '../react-router-dom';
 import UserList from '../comppnents/UserList';
 import UserAdd from '../comppnents/UserAdd';
 import UserDetail from '../comppnents/UserDetail';
@@ -19,7 +19,7 @@ export default class Home extends React.Component<Props>{
                 <div className="col-md-10">
                     <Route path="/user/list" component={UserList}/>
                     <Route path="/user/add" component={UserAdd}/>
-                    <Route path="/user/detail/:id" component={UserDetail}/>
+                    <Route path="/user/detail/:id" component={UserDetail} exact/>
                 </div>
             </div>
         )

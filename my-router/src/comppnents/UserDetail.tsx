@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link,RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from '../react-router-dom';
 import { User } from '../types'
 interface Params{
-    id:string;
+    id?:string;
 }
 type Props=RouteComponentProps<Params>;
 interface State{
@@ -15,13 +15,12 @@ export default class extends React.Component<Props,State>{
     }
     componentDidMount(){
         let user:User = this.props.location.state;
-        console.log(this.props)
         if(!user){
             let userStr = localStorage.getItem('users');
             let users = userStr?JSON.parse(userStr):[];
-            user = users.find((item:User)=>item.id === this.props.match.params.id);
+            user = users.find((item:User)=>item.id == this.props.match.params.id);
         }
-        this.setState({user})
+        if (user) this.setState({ user });
     }
     render(){
         return (

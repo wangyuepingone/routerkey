@@ -1,5 +1,5 @@
 import React,{ RefObject } from 'react';
-import { Link,RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from '../react-router-dom';
 type Props = RouteComponentProps&{
     title?:string;
 }
