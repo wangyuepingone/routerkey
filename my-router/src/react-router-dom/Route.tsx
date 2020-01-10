@@ -4,7 +4,7 @@ import { pathToRegexp,Key } from 'path-to-regexp'
 import { RouteComponentProps,match } from './';
 import { LocationDescritor } from '../history';
 interface Props{ 
-    path:LocationDescritor,
+    path?:LocationDescritor,
     exact?:boolean,
     component?:ComponentType<RouteComponentProps<any>> | ComponentType<any>;
     render?: (props: RouteComponentProps<any>) => React.ReactNode;

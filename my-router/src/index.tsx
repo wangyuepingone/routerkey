@@ -6,6 +6,7 @@ import { HashRouter as Router,Route,Link,Switch,Redirect,MenuLink } from './reac
 import Login from './comppnents/Login';
 import Protected from './comppnents/Protected';
 import Profile from './comppnents/Profile';
+import NavHeader from './comppnents/NavHeader'
 import 'bootstrap/dist/css/bootstrap.css';
 import './menu.css';
 let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
@@ -14,9 +15,7 @@ let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
      <>
      <div className="navbar navbar-inverse">
         <div className="container-fluid">
-            <div className="navbar-header">
-                <div className="navbar-brand">百颜皓翎</div>
-            </div>
+            <NavHeader title="百颜皓翎"/>
             <ul className="nav navbar-nav">
                  <li><MenuLink to="/" exact={true}>Home</MenuLink></li>
                  <li><MenuLink to="/user">User</MenuLink></li>
