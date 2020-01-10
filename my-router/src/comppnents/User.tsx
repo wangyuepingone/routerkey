@@ -19,7 +19,7 @@ export default class Home extends React.Component<Props>{
                 <div className="col-md-10">
                     <Route path="/user/list" component={UserList}/>
                     <Route path="/user/add" component={UserAdd}/>
-                    <Route path="/user/detail/:id" component={UserDetail}/>
+                    <Route path="/user/detail" component={UserDetail}/>
                 </div>
             </div>
         )

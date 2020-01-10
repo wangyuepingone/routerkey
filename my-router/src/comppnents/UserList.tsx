@@ -22,7 +22,7 @@ export default class extends React.Component<Props,State>{
                 {
                     this.state.users.map((user:User,index:number)=>(
                         <li className="list-group-item" key={index}>
-                            <Link to={{pathname:`/user/detail/${user.id}`,state:user}}>{user.username}</Link>
+                            <Link to={{pathname:`/user/detail/?id=${user.id}`,state:user}}>{user.username}</Link>
                         </li>
                     ))
                 }
