@@ -16,7 +16,6 @@ export default class extends React.Component<Props>{
                 let { exact=false, path="/", component:RoutetComponent} = child.props;
                 let keys:Array<Key>=[];
                 let regexp = pathToRegexp(path,keys,{end:exact});
-                console.log(pathname)
                 let result = pathname.match(regexp);
                 if(result){
                     return child

@@ -8,6 +8,7 @@ export interface match<Params = {}> {
     isExact: boolean;
     path: string;
     url: string;
+    search:string;
 }
 
 export interface RouteComponentProps<
@@ -17,5 +18,5 @@ export interface RouteComponentProps<
 > {
     history: History;
     location: Location<S>;
-    match: match<Params>;
+    match?: match<Params>;
 }

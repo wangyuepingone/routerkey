@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link,RouteComponentProps } from 'react-router-dom';
+import { Link,RouteComponentProps } from '../react-router-dom';
 import { User } from '../types';
 import qs from 'qs'
 interface Params{
-    id:string;
+    id?:string;
 }
 type Props=RouteComponentProps<Params>;
 interface State{
@@ -16,19 +16,19 @@ export default class extends React.Component<Props,State>{
     }
     componentDidMount(){
         let user:User = this.props.location.state;
-        console.log(this.props)
         // if(!user){
         //     let userStr = localStorage.getItem('users');
         //     let users = userStr?JSON.parse(userStr):[];
-        //     user = users.find((item:User)=>item.id === this.props.match.params.id);
+        //     user = users.find((item:User)=>item.id == this.props.match!.params.id);
         // }
 
         if(!user){
-            let params = this.props.location.search.slice(1);
+            let params = this.props.location.search;
+            console.log(this.props.location.search)
             let paramsString = qs.parse(params);
             let userStr = localStorage.getItem('users');
             let users = userStr?JSON.parse(userStr):[];
-            user = users.find((item:User)=>item.id ===paramsString.id )
+            user = users.find((item:User)=>item.id ==paramsString.id );
         }
         this.setState({user})
     }

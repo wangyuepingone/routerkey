@@ -14,7 +14,9 @@ export default class extends React.Component<Props,State>{
     locationState:any;
     state= {
         location:{
-            pathname:window.location.hash.slice(1)
+            pathname:window.location.hash.slice(1),
+            state:null,
+            search:window.location.hash.slice(1),
         }
     }
     componentDidMount(){
@@ -23,7 +25,8 @@ export default class extends React.Component<Props,State>{
                 location:{
                         ...this.state.location,
                         pathname:window.location.hash.slice(1) || '/',
-                        state:this.locationState
+                        state:this.locationState,
+                        search:window.location.hash.slice(1) || '/',
                 }
             })
         })
@@ -38,9 +41,11 @@ export default class extends React.Component<Props,State>{
                     let {pathname,state} = to;
                     that.locationState = state;
                     window.location.hash = pathname;
+                    window.location.search=pathname
                 }else{
                     that.locationState = null;
                     window.location.hash = to;
+                    window.location.search=to
                 }
             }
         };
