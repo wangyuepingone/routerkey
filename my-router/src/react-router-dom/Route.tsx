@@ -1,21 +1,29 @@
 import React,{ ComponentType } from 'react';
 import RouterContext from './context';
 import { pathToRegexp,Key } from 'path-to-regexp'
-import { RouteComponentProps,match } from './'
-interface Props{
-    path:string,
+import { RouteComponentProps,match } from './';
+import { LocationDescritor } from '../history';
+interface Props{ 
+    path:LocationDescritor,
     exact?:boolean,
     component?:ComponentType<RouteComponentProps<any>> | ComponentType<any>;
     render?: (props: RouteComponentProps<any>) => React.ReactNode;
+    children?: (props: RouteComponentProps<any>) => React.ReactNode;
 }
 
 //Route的核心作用是判断当前组件path属性路径和浏览器路径的path是否一致
 export default class extends React.Component<Props>{
     static contextType = RouterContext
     render(){
-        let { path='/',component:RouterComponent,exact=false,render} = this.props;
+        let { path='/',component:RouterComponent,exact=false,render,children} = this.props;
         let pathname = this.context.location.pathname;
         let keys:Array<Key> = []
+        path = typeof path == 'object'?path.pathname:path;
+        let routerComponentProps:RouteComponentProps<any> = {
+            location:this.context.location,
+            history:this.context.history
+        }
+
         let regexp = pathToRegexp(path,keys,{end:exact});
         let result:Array<string> = pathname.match(regexp);
         if(result){
@@ -27,26 +35,33 @@ export default class extends React.Component<Props>{
                 memo[paramsName[index]] = value;
                 return memo
             },memo);
-            type Parmas = typeof params
+            type Parmas = typeof params;
             let matchResult:match<Parmas> = {
                 params,
                 isExact:pathname === url,
                 path,
                 url
             };
-            let props:RouteComponentProps<Parmas> ={
+            let props:RouteComponentProps<Parmas>={
                 location:this.context.location,
                 history:this.context.history,
                 match:matchResult
             }
+            routerComponentProps.match = matchResult
             if(RouterComponent){
                 return <RouterComponent {...props}/>
             }else if(render){
                 return render(props)
+            }else if(children){
+                return children(props)
             }else{
                 return null
             }
             
+        }else{
+            if(children){
+                return children(routerComponentProps)
+            }
         }
         return null
     }

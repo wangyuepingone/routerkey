@@ -18,7 +18,7 @@ export default class extends React.Component<Props,State>{
         if(!user){
             let userStr = localStorage.getItem('users');
             let users = userStr?JSON.parse(userStr):[];
-            user = users.find((item:User)=>item.id == this.props.match.params.id);
+            user = users.find((item:User)=>item.id == this.props.match!.params.id);
         }
         if (user) this.setState({ user });
     }

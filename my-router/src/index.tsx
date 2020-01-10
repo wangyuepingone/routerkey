@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './comppnents/Home';
 import User from './comppnents/User';
-import { HashRouter as Router,Route,Link,Switch,Redirect } from './react-router-dom';
+import { HashRouter as Router,Route,Link,Switch,Redirect,MenuLink } from './react-router-dom';
 import Login from './comppnents/Login';
 import Protected from './comppnents/Protected';
 import Profile from './comppnents/Profile';
 import 'bootstrap/dist/css/bootstrap.css';
+import './menu.css';
 let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
 
  ReactDOM.render(<Router>
@@ -17,9 +18,9 @@ let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
                 <div className="navbar-brand">百颜皓翎</div>
             </div>
             <ul className="nav navbar-nav">
-                 <li><Link to="/">Home</Link></li>
-                 <li><Link to="/user">User</Link></li>
-                 <li><Link to="/profile">Profile</Link></li>
+                 <li><MenuLink to="/" exact={true}>Home</MenuLink></li>
+                 <li><MenuLink to="/user">User</MenuLink></li>
+                 <li><MenuLink to="/profile">Profile</MenuLink></li>
              </ul>
         </div>
      </div>

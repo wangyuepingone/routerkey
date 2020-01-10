@@ -1,4 +1,4 @@
-import { Location,History } from '../history'
+import { Location,History,LocationState } from '../history'
 export interface ContextValue{
     location?:Location;
     history?: History;
@@ -17,5 +17,11 @@ export interface RouteComponentProps<
 > {
     history: History;
     location: Location<S>;
-    match: match<Params>;
+    match?: match<Params>;
+}
+
+export interface RouteChildrenProps<Params extends { [K in keyof Params]?: string } = {}, S = LocationState> {
+    history: History;
+    location: Location<S>;
+    match: match<Params> | null;
 }
