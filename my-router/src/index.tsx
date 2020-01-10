@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './comppnents/Home';
 import User from './comppnents/User';
-import Profile from './comppnents/Profile';
 import { HashRouter as Router,Route,Link,Switch,Redirect } from './react-router-dom';
+import Login from './comppnents/Login';
+import Protected from './comppnents/Protected';
+import Profile from './comppnents/Profile';
 import 'bootstrap/dist/css/bootstrap.css';
 let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
 
@@ -27,8 +29,8 @@ let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
                 <Switch>
                     <Route path="/" exact={true} component={Home}/>
                     <Route path="/user" component={User}/>
-                    <Route path="/profile" component={Profile}/>
-                    <Redirect to="/" />
+                    <Route path="/login" component={Login}/>
+                    <Protected path="/profile" component={Profile}/>
                 </Switch>
             </div>
         </div>

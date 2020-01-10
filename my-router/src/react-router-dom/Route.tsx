@@ -1,18 +1,19 @@
-import React from 'react';
+import React,{ ComponentType } from 'react';
 import RouterContext from './context';
 import { pathToRegexp,Key } from 'path-to-regexp'
 import { RouteComponentProps,match } from './'
 interface Props{
     path:string,
     exact?:boolean,
-    component:React.JSXElementConstructor<any>
+    component?:ComponentType<RouteComponentProps<any>> | ComponentType<any>;
+    render?: (props: RouteComponentProps<any>) => React.ReactNode;
 }
 
 //Route的核心作用是判断当前组件path属性路径和浏览器路径的path是否一致
 export default class extends React.Component<Props>{
     static contextType = RouterContext
     render(){
-        let { path='/',component:RouterComponent,exact=false} = this.props;
+        let { path='/',component:RouterComponent,exact=false,render} = this.props;
         let pathname = this.context.location.pathname;
         let keys:Array<Key> = []
         let regexp = pathToRegexp(path,keys,{end:exact});
@@ -38,7 +39,14 @@ export default class extends React.Component<Props>{
                 history:this.context.history,
                 match:matchResult
             }
-            return <RouterComponent {...props}/>
+            if(RouterComponent){
+                return <RouterComponent {...props}/>
+            }else if(render){
+                return render(props)
+            }else{
+                return null
+            }
+            
         }
         return null
     }
