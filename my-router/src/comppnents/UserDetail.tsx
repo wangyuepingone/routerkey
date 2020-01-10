@@ -15,6 +15,7 @@ export default class extends React.Component<Props,State>{
     }
     componentDidMount(){
         let user:User = this.props.location.state;
+        console.log(this.props)
         if(!user){
             let userStr = localStorage.getItem('users');
             let users = userStr?JSON.parse(userStr):[];

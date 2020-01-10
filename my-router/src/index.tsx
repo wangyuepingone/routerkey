@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Home from './comppnents/Home';
 import User from './comppnents/User';
 import Profile from './comppnents/Profile';
-import { HashRouter as Router,Route,Link,Switch,Redirect } from './react-router-dom';
+import { HashRouter as Router,Route,Link,Switch,Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 let root:HTMLDivElement = document.getElementById('root') as HTMLDivElement;
 
