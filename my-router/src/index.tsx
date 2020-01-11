@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './comppnents/Home';
 import User from './comppnents/User';
-import { HashRouter as Router,Route,Link,Switch,Redirect,MenuLink } from './react-router-dom';
+import { HashRouter as Router,Route,Switch,MenuLink } from './react-router-dom';
 import Login from './comppnents/Login';
 import Protected from './comppnents/Protected';
 import Profile from './comppnents/Profile';

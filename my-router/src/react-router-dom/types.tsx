@@ -25,3 +25,7 @@ export interface RouteChildrenProps<Params extends { [K in keyof Params]?: strin
     location: Location<S>;
     match: match<Params> | null;
 }
+
+export interface Message{
+    (location:Location):string;
+}

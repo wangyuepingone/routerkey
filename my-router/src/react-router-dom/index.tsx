@@ -4,7 +4,9 @@ import Link from './Link';
 import Switch from './Switch';
 import Redirect from './Redirect';
 import MenuLink from './MenuLInk';
-import withRouter from './withRouter'
+import withRouter from './withRouter';
+import Prompt from './Prompt';
+import BrowserRouter from './BrowserRouter';
 export {
     HashRouter,
     Route,
@@ -12,6 +14,8 @@ export {
     Switch,
     Redirect,
     MenuLink,
-    withRouter
+    withRouter,
+    Prompt,
+    BrowserRouter
 }
 export * from './types'

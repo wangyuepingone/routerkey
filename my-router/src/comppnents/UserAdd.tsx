@@ -1,17 +1,19 @@
 import React,{ RefObject } from 'react';
-import { RouteComponentProps } from '../react-router-dom';
+import { RouteComponentProps,Prompt } from '../react-router-dom';
+import { Location } from '../history';
 type Props = RouteComponentProps&{
     title?:string;
 }
 
 interface State{
-    
+    isBlocking:boolean;//是否阻止跳转到别的路径
 }
 export default class extends React.Component<Props,State>{
     username:RefObject<HTMLInputElement>;
     email:RefObject<HTMLInputElement>;
     constructor(props:Props){
         super(props);
+        this.state={isBlocking:false};
         this.username = React.createRef();
         this.email = React.createRef()
     }
@@ -26,17 +28,28 @@ export default class extends React.Component<Props,State>{
         this.props.history.push('/user/list');
     }
 
+    handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
+        this.setState({
+            isBlocking:this.email.current!.value.length>0 || this.username.current!.value.length>0
+        })
+    }
+
     render(){
         return (
           <form onSubmit={this.handleSubmit}>
+
+              <Prompt 
+              when={this.state.isBlocking}
+              message={(location:Location)=>`请问是否跳转到${location.pathname}路径？`}
+              />
               <div className="form-group">
                   <label htmlFor="username">用户名</label>
-                  <input type="username" className="form-control" ref={this.username}/>
+                  <input  onChange={this.handleChange} type="username" className="form-control" ref={this.username}/>
               </div>
 
               <div className="form-group">
                   <label htmlFor="email">邮箱</label>
-                  <input type="email" className="form-control" ref={this.email}/>
+                  <input onChange={this.handleChange} type="email" className="form-control" ref={this.email}/>
               </div>
 
               <div className="form-group">
