@@ -22,7 +22,7 @@
             let pushState = history.pushState;
             history.pushState = function(state,title,pathname){
                 if(typeof window.onpushstate === 'function'){
-                    window.onpushstate(state,title,pathname)
+                    window.onpushstate(state,pathname)
                 }
                 return pushState.apply(history,arguments);
             }
